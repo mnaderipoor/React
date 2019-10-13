@@ -1,0 +1,10 @@
+.bg {
+  background-color: #1a1a1a;
+}
+.nav {
+  padding: 5px;
+  margin: 5px 5px;
+  display: block;
+  color: #fff;
+  font: 1.2em sans-serif;
+}
