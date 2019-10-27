@@ -29,27 +29,36 @@ class PieBizcharts extends Component {
         });
         const cols = {
             percent: {
-                formatter: val => {
-                    val = val * 100 + "%";
-                    return val;
-                }
+                formatter: val => (val = `${Number(Math.round((val * 100)+'e2')+'e-2')}%`)
             }
         };
         return (
             <div>
                 <Chart
-                    height={window.innerHeight}
+                    // height={window.innerHeight}
+                    height={300}
                     data={dv}
                     scale={cols}
-                    padding={[8, 10, 8, 8]}
+                    // padding={[80, 100,80, 80]}
+                    padding="auto"
                     forceFit
+                    onGetG2Instance={(chart) => {
+                        setTimeout(() => {
+                            const geom = chart.get('geoms')[0];
+                            const items = geom.get('data');
+                            geom.setSelected(items[1]);
+                        }, 2000);
+                    }}
+                    onPlotClick={(ev) => {
+                        console.log(ev);
+                    }}
                 >
                     <Coord type="theta" radius={0.9} />
                     <Axis name="percent" />
                     <Legend
                         position="right"
-                        offsetY={-window.innerHeight / 3 + 120}
-                        offsetX={-40}
+                        offsetY={-window.innerHeight / 2 + 120}
+                        offsetX={0}
                     />
                     <Tooltip
                         showTitle={false}
@@ -62,7 +71,7 @@ class PieBizcharts extends Component {
                         tooltip={[
                             "item*percent",
                             (item, percent) => {
-                                percent = percent * 100 + "%";
+                                percent =`${Number(Math.round((percent*100) +'e2')+'e-2')}%` ;
                                 return {
                                     name: item,
                                     value: percent
@@ -74,12 +83,19 @@ class PieBizcharts extends Component {
                             stroke: "#fff"
                         }}
                     >
-                        <Label
-                            content="percent"
-                            formatter={(val, item) => {
-                                return item.point.item + ": " + Number((val).toFixed(1));
-                            }}
-                        />
+                        {/*<Label*/}
+                        {/*    content="percent"*/}
+                        {/*    formatter={(val, item) => {*/}
+                        {/*        return item.point.item + ": " + val;*/}
+                        {/*    }}*/}
+                        {/*    // offset={-40}*/}
+                        {/*    // textStyle={{*/}
+                        {/*    //     rotate: 0,*/}
+                        {/*    //     textAlign: "center",*/}
+                        {/*    //     shadowBlur: 2,*/}
+                        {/*    //     shadowColor: "rgba(0, 0, 0, .45)"*/}
+                        {/*    // }}*/}
+                        {/*/>*/}
                     </Geom>
                 </Chart>
             </div>

@@ -1,9 +1,19 @@
-import React, {Component} from "react";
-import {Table, Popconfirm, Button, Row, Divider, Col, Card} from "antd";
-import "./risksPage.css";
+import React, { Component } from "react";
+import BarBizcharts from "../components/chart/barBizcharts"
 import TableAnt from "../components/table/tableAnt";
-import BarBizcharts from "../components/chart/barBizcharts";
-class RisksPage extends Component {
+import {
+    Button,
+    Card,
+    Col,
+    Divider,
+    Icon,
+    PageHeader,
+    Progress,
+    Row,
+    Table
+} from "antd";
+
+class ThreatPage extends Component {
     state = {
         threats: [],
         data : [
@@ -70,7 +80,7 @@ class RisksPage extends Component {
                 {/*         /> */}
                 <Row className="page-content">
                     <Divider>
-                        <h4>"لیست فراهشدارها"</h4>
+                        <h4>"لیست تهدیدها"</h4>
                     </Divider>
                     <br />
                     <Row className="threat-list padding-side-20 component-background box-shadow">
@@ -84,7 +94,7 @@ class RisksPage extends Component {
                     <br />
                     <Row gutter={16} type="flex" justify="space-between" className="up-status">
                         <Col span={22}  offset={1}>
-                            <Card title="تعداد کل فراهشدارها برحسب زمان"  className="card-progress box-shadow">
+                            <Card title="تعداد کل تهدیدها برحسب زمان"  className="card-progress box-shadow">
                                 <BarBizcharts data={this.state.data}/>
                             </Card>
                         </Col>
@@ -95,5 +105,4 @@ class RisksPage extends Component {
         );
     }
 }
-
-export default RisksPage;
+export default ThreatPage;

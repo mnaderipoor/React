@@ -6,7 +6,7 @@ import Logout from "../components/logout";
 import Threats from "../components/threats";
 import NotFound from "../container/notFound";
 import Dashboard from "../container/dashboard";
-import ThreatsPage from "../container/threatsPage";
+import ThreatPage from "../container/threatPage";
 import ProtectedRoute from "../components/common/protectedRoute";
 import SAPage from "../container/SAPage";
 
@@ -25,7 +25,7 @@ const Routes =()=> {
                   <Route path="/logout" component={Logout} />
                   <Route path="/not-found" component={NotFound} />
                   <Route path="/dashboard" component={Dashboard} />
-                  <Route path="/threats" component={ThreatsPage} />
+                  <Route path="/threats" component={ThreatPage} />
                   <Route path="/sa" component={SAPage} />
 
                   <Redirect from="/" exact to="/dashboard" />

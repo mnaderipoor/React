@@ -26,21 +26,21 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div >
           <ToastContainer />
         <Layout style={{ minHeight: "100vh", textAlign: "right" }}>
           <Layout>
             <Header
               style={{
-                background: "#۲۱۲۵۲۹",
+                background: "#FFFFFF",
                 padding: 0
               }}
             />
             <Content
               style={{
-                margin: "24px 16px",
+                margin: "0px 0px",
                 padding: 24,
-                background: "#fff",
+                background: "#FFFFFF",
                 minHeight: 280
               }}
             >

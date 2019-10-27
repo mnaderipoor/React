@@ -20,7 +20,6 @@ class RadarBizcharts extends React.Component {
     render() {
         const { DataView } = DataSet;
         const {data} = this.props ;
-        console.log (data)
         const dv = new DataView().source(data);
         dv.transform({
             type: "fold",
@@ -38,15 +37,23 @@ class RadarBizcharts extends React.Component {
         return (
             <div>
                 <Chart
-                    height={window.innerHeight}
+                    // height={window.innerHeight}
+                    height={300}
                     data={dv}
-                    padding={[20, 20, 95, 20]}
+                    // padding={[20, 20, 95, 20]}
+                    padding="auto"
                     scale={cols}
                     forceFit
                 >
                     <Coord type="polar" radius={0.8} />
                     <Axis
                         name="item"
+                        // label={{
+                        //     autoRotate: true,
+                        //     textStyle: {
+                        //         fill: "#CBCBCB",
+                        //     }
+                        // }}
                         line={null}
                         tickLine={null}
                         grid={{
@@ -61,6 +68,12 @@ class RadarBizcharts extends React.Component {
                         name="score"
                         line={null}
                         tickLine={null}
+                        // label={{
+                        //     textStyle: {
+                        //         fontSize: '15',
+                        //         fill: "#CBCBCB",
+                        //     }
+                        // }}
                         grid={{
                             type: "polygon",
                             lineStyle: {
