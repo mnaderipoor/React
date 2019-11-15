@@ -1,0 +1,26 @@
+@import '~antd/dist/antd.css';
+
+.ant-table{
+    color : #FFF;
+}
+.clickRowStyl{background-color :blue}
+
+.ant-table-tbody>.clickRowStyl:hover>td{background-color: red}
+
+/*//:global(.ant-btn-primary) {*/
+/*//    background-color: var(--secondary-color);*/
+/*//    &:hover {*/
+/*//        background-color: var(--secondary-hover-color) !important;*/
+/*//        border-color: var(--secondary-hover-color) !important;*/
+/*//    }*/
+/*//}*/
+/*//*/
+/*//.ant-table-expanded-row {*/
+/*//    .ant-table-thead > tr > th {*/
+/*//        background: #f1f1f1;*/
+/*//    }*/
+/*//*/
+/*//    .ant-table-tbody > tr > td {*/
+/*//        background: #fff;*/
+/*//    }*/
+/*//}*/

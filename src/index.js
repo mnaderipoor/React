@@ -8,9 +8,11 @@ import "@fortawesome/fontawesome-free/css/all.css";
 
 import logger from "./services/logService";
 import RouteHighLevel from "./config/routeHighLevel";
+import './i18n'
 
 logger.init();
 ReactDOM.render(
+
   <RouteHighLevel/>,
   document.getElementById("root")
 );

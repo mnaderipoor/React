@@ -1,8 +1,9 @@
 import axios from "axios";
 import logger from "./logService";
 import { toast } from "react-toastify";
-
+//You can intercept requests or responses before they are handled by then or catch.
 axios.interceptors.response.use(null, error => {
+  //// Do something with response data
   const expectedError =
     error.response &&
     error.response.status >= 400 &&

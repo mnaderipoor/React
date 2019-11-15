@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Table, Popconfirm, Button, Row, Divider, Col, Card} from "antd";
 import "./risksPage.css";
 import TableAnt from "../components/table/tableAnt";
+import { withTranslation } from "react-i18next";
 import BarBizcharts from "../components/chart/barBizcharts";
 class RisksPage extends Component {
     state = {
@@ -61,39 +62,22 @@ class RisksPage extends Component {
         ]
     };
     render() {
+        const { t } = this.props;
         return(
-
-            <div id="threats">
-                {/*         <PageHeader */}
-                {/*           onBack={() => this.history.push("/")} */}
-                {/*           title="threats" */}
-                {/*         /> */}
-                <Row className="page-content">
-                    <Divider>
-                        <h4>"لیست فراهشدارها"</h4>
-                    </Divider>
-                    <br />
-                    <Row className="threat-list padding-side-20 component-background box-shadow">
-                        <Col span={22}  offset={1}>
-                            <TableAnt />
-                        </Col>
-
-                    </Row>
-                    <br />
-                    <Divider/>
-                    <br />
-                    <Row gutter={16} type="flex" justify="space-between" className="up-status">
-                        <Col span={22}  offset={1}>
-                            <Card title="تعداد کل فراهشدارها برحسب زمان"  className="card-progress box-shadow">
-                                <BarBizcharts data={this.state.data}/>
-                            </Card>
-                        </Col>
-                    </Row>
-
+            <div className="page-content">
+                <Row >
+                        <Card title={t('dashboard.threatTableTitle')} bordered={false} className="cardStyle">
+                            <TableAnt data={this.state.threatsdata} />
+                        </Card>
+                </Row>
+                <Row>
+                    <Card title="تعداد کل فراهشدارها برحسب زمان"  className="card-progress box-shadow">
+                        <BarBizcharts data={this.state.data}/>
+                    </Card>
                 </Row>
             </div>
         );
     }
 }
 
-export default RisksPage;
+export default withTranslation()(RisksPage);

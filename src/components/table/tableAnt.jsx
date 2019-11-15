@@ -1,77 +1,13 @@
 import React , {Component} from 'react'
-import { Table, Input, Button, Icon } from 'antd';
+import { Table, Input, Button, Icon ,Tag} from 'antd';
 import Highlighter from 'react-highlight-words';
-
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-    },
-    {
-        key: '2',
-        name: 'Joe Black',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-    },
-    {
-        key: '3',
-        name: 'Jim Green',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-    },
-    {
-        key: '4',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '5',
-        name: 'Jim Red',
-        age: 12,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '6',
-        name: 'Jim Red',
-        age: 22,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '7',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '8',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '9',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '10',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-    {
-        key: '11',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-];
+import threatData from "../../__mocks__/threat"
+import {withTranslation} from "react-i18next";
+import "./tableAnt.css"
+import Ellipsis from "ant-design-pro/lib/Ellipsis";
 
 class TableAnt extends Component {
+
     state = {
         searchText: '',
     };
@@ -135,40 +71,105 @@ class TableAnt extends Component {
         clearFilters();
         this.setState({ searchText: '' });
     };
-
     render() {
-        const columns = [
+
+        const { t ,data} = this.props;
+
+        const columns =  [
             {
-                title: 'Name',
-                dataIndex: 'name',
-                key: 'name',
-                width: '30%',
-                ...this.getColumnSearchProps('name'),
+                title: t('threat.title'),
+                dataIndex: 'title',
+                key: 'title',
+                width: '100px',
+                ...this.getColumnSearchProps('title'),
+                render:text=><Ellipsis length={20}>{text}</Ellipsis>,
+
+            },
+
+            {
+                title: t('threat.affected_scope'),
+                dataIndex: 'affected_scope',
+                key: 'affected_scope',
+               ...this.getColumnSearchProps('affected_scope'),
+                render:text=><Ellipsis length={10}>{text}</Ellipsis>,
             },
             {
-                title: 'Age',
-                dataIndex: 'age',
-                key: 'age',
-                width: '20%',
-                ...this.getColumnSearchProps('age'),
+                title: t('threat.threat_type'),
+                dataIndex: 'threat_type',
+                key: 'threat_type',
+                ...this.getColumnSearchProps('threat_type'),
+                render:text=><Ellipsis length={10}>{text}</Ellipsis>,
+            }, {
+                title: t('threat.threat_score'),
+                dataIndex: 'threat_score',
+                key: 'threat_score',
+                ...this.getColumnSearchProps('threat_score'),
+                render: threat_score => {
+                    let color = "";
+                    let score = Number(threat_score)
+                    if (score < 15)
+                        color = "#0033EE"
+                    if (score >= 15 && score < 30)
+                        color = "#7ED321"
+                    if (score >= 30 && score < 45)
+                        color = "#FFFF00"
+                    if (score >= 45 && score < 60)
+                        color = "#FFBF00"
+                    if (score >= 60 && score < 80)
+                        color = "#FF0000"
+                    if (score >= 80)
+                        color = "#8f0000"
+                    return (
+                        <span>
+                        <Tag color={color} key={threat_score} style={{ color:"#000" ,border: "2px solid #FFF"}}>
+                            {threat_score}
+                        </Tag>
+                        </span>
+                    );
+                },
             },
             {
-                title: 'Address',
-                dataIndex: 'address',
-                key: 'address',
-                ...this.getColumnSearchProps('address'),
+                title: t('threat.occurrence_time'),
+                dataIndex: 'occurrence_time',
+                key: 'occurrence_time',
+                ...this.getColumnSearchProps('occurrence_time'),
+                render:text=><Ellipsis length={10}>{text}</Ellipsis>,
             },
-        ];
+            {
+                title: t('threat.description'),
+                dataIndex: 'description',
+                key: 'description',
+                ...this.getColumnSearchProps('description'),
+                render:text=><Ellipsis length={20}>{text}</Ellipsis>,
+            },
+            {
+                title: t('threat.vulnerabilities'),
+                dataIndex: 'vulnerabilities',
+                key: 'vulnerabilities',
+                ...this.getColumnSearchProps('vulbarability'),
+                render:vulnerabilities=><Ellipsis length={40}>{ vulnerabilities.join()}</Ellipsis>,
+            },
+            {
+                title: t('threat.attack_patterns'),
+                dataIndex: 'attack_patterns',
+                ...this.getColumnSearchProps('attack_pattern'),
+                render:attack_patterns=><Ellipsis length={40}>{ attack_patterns.join()}</Ellipsis>,
+            },
+
+
+        ]
         return <Table
+            // onRow={(record)=>{return{ onMouseOver:()=>{this.setState({rowId: record.id})}}}}
+            // rowClassName={(record)=>{return record.id === this.state.rowId ? 'clickRowStyl' : '';}}
             columns={columns}
             dataSource={data}
             // size="small"
-            bordered
+            bordered={false}
             rowKey="id"
-            pagination={{ pageSize: 10 }}
-            scroll={{ x: 1300, y:190 }}
+            pagination={{ pageSize: 4 }}
+            scroll={{ x:"100%"}}
         />;
     }
 }
 
-export default  TableAnt;
+export default  withTranslation()(TableAnt);

@@ -1,181 +1,149 @@
 import React, { Component } from "react";
-import _ from "lodash";
-import Speedometer from "../components/chart/speedometer"
-import GaugeBizcharts from "../components/chart/gaugeBizcharts"
-import PieBizcharts  from "../components/chart/pieBizcharts"
-import RadarBizcharts from "../components/chart/radarBizcharts"
-import LineBizcharts from "../components/chart/lineBizcharts"
-import BarBizcharts from "../components/chart/barBizcharts"
-import TrafficLight from '../components/common/trafficLight';
-import TLP from '../components/common/tlp';
-import {
-  Button,
-  Card,
-  Col,
-  Divider,
-  Icon,
-  PageHeader,
-  Progress,
-  Row,
-  Table
-} from "antd";
-import {getThreats} from "../services/threatService";
-import {Link} from "react-router-dom";
-import TableAnt from "../components/table/tableAnt";
+import { Card, Col, Divider, Row } from "antd";
 
+import GaugeBizcharts from "../components/chart/gaugeBizcharts";
+import PieHighcharts from "../components/chart/pieHighcharts";
+import RadarBizcharts from "../components/chart/radarBizcharts";
+import BarInteractiveHighcharts from "../components/chart/barInteractiveHighcharts";
+import TLP from "../components/chart/tlp";
+import TableAnt from "../components/table/tableAnt";
+import { withTranslation } from "react-i18next";
+
+import { getThreats } from "../services/threatService";
+
+
+import MapPestelFactor from "../__mocks__/customizeData/mapPestelFactor";
+import MapThreatCount from "../__mocks__/customizeData/mapThreatCount"
+import MapThreatTypePercent from "../__mocks__/customizeData/mapThreatTypePercent";
+
+import MockThreatTypePercent from "../__mocks__/threatTypePercent";
+import MockRadarData from "../__mocks__/isacPestel";
+import MockBarData from "../__mocks__/threatCount";
+import MockThreatData from "../__mocks__/threat"
+
+import "./dashboard.css";
+import BarHighcharts from "../components/chart/barHighcharts";
+import LineHighcharts from "../components/chart/lineHighcharts";
+import TrafficLight from "../components/common/trafficLight";
+import TableCust from "../components/table/threatsTable"
 class Dashboard extends Component {
   state = {
-     data : [
-      {
-        item: "a",
-        value: 40
-      },
-      {
-        item: "b",
-        value: 61
-      },
-      {
-        item: "c",
-        value: 27
-      },
-      {
-        item: "d",
-        value: 83
-      },
-      {
-        item: "e",
-        value: 9
-      }
-    ],
-    threats: [],
-    dataSource : [
-      {
-        key: '1',
-        name: 'Mike',
-        age: 32,
-        address: '10 Downing Street',
-      },
-      {
-        key: '2',
-        name: 'John',
-        age: 42,
-        address: '10 Downing Street',
-      }
-  ],
-    columns : [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-      },
-      {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-      },
-      {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-      }
-    ]
+    threatsdata:MockThreatData,
+    threatscount:MapThreatCount(MockBarData),
+    threatTypePercent:MapThreatTypePercent(MockThreatTypePercent ),
+    pestalFactor:MapPestelFactor(MockRadarData)
+
   };
+
   async componentDidMount() {
-    const { data: threats } = await getThreats();
-    this.setState({ threats });
+      // this.setState({threatsdata: MockThreatData} );
+      // this.setState( {threatscount:await MapThreatCount(MockBarData)});
+      // this.setState({threatTypePercent:await MapThreatTypePercent(MockThreatTypePercent )});
+      // this.setState({pestalFactor:await MapPestelFactor(MockRadarData )});
+
+    // const {data} = await getThreats();
+    // if (data.length === 0)
+    //   this.setState({ threatsdata: MockThreatData });
+    // else
+    //   this.setState( {threatsdata: data} );
+    //
+    // const { threatscount} = await getThreats();
+    // this.setState(MapThreatCount(threatscount) );
+    // if (this.state.threatscount.length === 0)
+    //   this.setState( MapThreatCount(MockBarData));
+    //
+    // const { threatTypePercent} = await getThreats();
+    // this.setState(MapThreatTypePercent(threatTypePercent));
+    // if (this.state.threatTypePercent.length === 0)
+    //   this.setState(MapThreatTypePercent(MockThreatTypePercent ));
+    //
+    // const { pestalFactor} = await getThreats();
+    // this.setState(MapPestelFactor(pestalFactor));
+    // if (this.state.pestalFactor.length === 0)
+    //   this.setState(MapPestelFactor(MockRadarData ));
   }
-
-
   render() {
-    return(
-    <div id="dashboard">
-      {/*<PageHeader*/}
-      {/*  className="disable-back"*/}
-      {/*  onBack={() => null}*/}
-      {/*  backIcon={<Icon type="dashboard" />}*/}
-      {/*  // title="سامانه اشتراک گذاری هشدارهای امنیتی"*/}
-      {/*/>*/}
-      <Row className="page-content">
-        <Divider>
-            <h4>"آگاهی وضعیتی"</h4>
-        </Divider>
-        <br />
-        <Row  gutter={16} type="flex" justify="space-between" className="up-status">
-          <Col span={10} className="text-center" style={{ marginBottom: 20 }}>
-            <Card  bordered={false} title="تاثیر آگاهی وضعیتی بر پارامترهای PESTEL" className="card-progress box-shadow" >
-              <RadarBizcharts data={this.state.data} />
-            </Card>
-          </Col>
-          <Col span={10} className="text-center" style={{ marginBottom: 20 }}>
-            <Card  bordered={false} title="برآیند آگاهی وضعیتی قلمروها" className="card-progress box-shadow"
-                // style={{backgroundColor: 'rgba(255, 255, 255, 0.0)', border: 0 }}
-                // headStyle={{backgroundColor: 'rgba(255, 255, 255, 0.4)', border: 0 }}
-                // bodyStyle={{backgroundColor: '#212529', border: 0 }}
-            >
-              <Speedometer/>
-            </Card>
-          </Col>
-          <Col span={4} className="text-center"  >
-            <Card  bordered={false} title="TLP" className="card-progress box-shadow">
-              <TLP width="60"  height="250"/>
-            </Card>
-          </Col>
-        </Row>
-        <br />
-        <Divider>
-          <h4 className="no-margin">
-           "تهدیدها"
-          </h4>
-        </Divider>
-        <br />
-        {/*<Row className="threat-list padding-side-20 component-background box-shadow">*/}
-        {/*  <Table*/}
-        {/*      size="small"*/}
-        {/*      bordered*/}
-        {/*      dataSource={this.state.dataSource}*/}
-        {/*      rowKey="id"*/}
-        {/*      columns={this.state.columns}*/}
-        {/*      pagination={{ pageSize: 10 }}*/}
-        {/*      scroll={{ x: 1300, y:240 }}*/}
-        {/*  />*/}
-        {/*  <br />*/}
-        {/*</Row>*/}
-        <Row className="threat-list padding-side-20 component-background box-shadow">
-          <TableAnt />
-        </Row>
-        <br />
-        <br />
-        <Row gutter={16} type="flex" justify="space-between" className="up-status">
-          <Col span={12} className="text-center" style={{ marginBottom: 20 }}>
-            <Card  bordered={false} title="درصد رخداد انواع تهدید"  className="card-progress box-shadow">
+    const { t } = this.props;
+    return (
+      <div className="page-content">
+        <Row>
+          <Row gutter={8} type="flex" justify="space-between">
+            <Col span={12}>
+              <Card title={t('dashboard.radarTitle')} bordered={false} className="cardStyle">
+                <RadarBizcharts data={this.state.pestalFactor} height={200}/>
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Row  style={{MarginTop:"0px"}}>
+              <Col span={18}>
+                <Card title={t('dashboard.sa')} bordered={false} className="cardStyle" >
+                  <GaugeBizcharts height={200} percent={97} />
+                </Card>
+              </Col>
+              <Col span={6}>
+                <Card  title={t('dashboard.tlp')}  bordered={false} className="cardStyle">
 
-              <PieBizcharts data={this.state.data}/>
+                    <TLP width="60" height="205" />
+                </Card>
+              </Col>
+              </Row>
+            </Col>
+
+          </Row>
+          <br/>
+          <Row >
+            <Card title={t('dashboard.threatTableTitle')} bordered={false} className="cardStyle">
+              <TableAnt data={this.state.threatsdata} />
             </Card>
-          </Col>
-          <Col span={12} className="text-center"  >
-            <Card  bordered={false} title="تعداد کل تهدیدها بر حسب زمان" className="card-progress box-shadow">
-              <LineBizcharts data={this.state.data}/>
-            </Card>
-          </Col>
+          </Row>
+          {/*<Row className="threat-list padding-side-20 component-background box-shadow">*/}
+          {/*  <Table*/}
+          {/*      size="small"*/}
+          {/*      bordered*/}
+          {/*      dataSource={this.state.dataSource}*/}
+          {/*      rowKey="id"*/}
+          {/*      columns={this.state.columns}*/}
+          {/*      pagination={{ pageSize: 10 }}*/}
+          {/*      scroll={{ x: 1300, y:240 }}*/}
+          {/*  />*/}
+          {/*  <br />*/}
+          {/*</Row>*/}
+          <Row
+            gutter={16}
+            type="flex"
+            justify="space-between"
+            className="up-status"
+          >
+            <Col span={8} className="text-center" style={{ marginBottom: 20 }}>
+              <Card title={t('dashboard.threatsOccurencePercent')} bordered={false} className="cardStyle" >
+                 <PieHighcharts data= {this.state.threatTypePercent}/>
+              </Card>
+            </Col>
+            <Col span={16} className="text-center">
+              <Card  title={t('dashboard.threatsCount')} bordered={false} className="cardStyle">
+                <BarInteractiveHighcharts  major={this.state.threatscount[0]} minor={this.state.threatscount[1]}/>
+
+              </Card>
+            </Col>
+          </Row>
+          {/*<Row*/}
+          {/*  gutter={16}*/}
+          {/*  type="flex"*/}
+          {/*  justify="space-between"*/}
+          {/*  className="up-status"*/}
+          {/*>*/}
+          {/*  <Col span={20} offset={2}>*/}
+          {/*    <Card bordered={false} className="cardStyle">*/}
+          {/*      /!*title="تعداد کل فراهشدارها برحسب زمان"*!/*/}
+          {/*      /!*<BarBizcharts data={this.state.data}/>*!/*/}
+          {/*      <BarInteractiveHighcharts  major={mapThreatCount(barData)[0]} minor={mapThreatCount(barData)[1]}/>*/}
+          {/*    </Card>*/}
+          {/*  </Col>*/}
+          {/*</Row>*/}
         </Row>
-        <br />
-        <Divider>
-          <h4 className="no-margin">
-            "فراهشدارها"
-          </h4>
-        </Divider>
-        <br />
-        <Row gutter={16} type="flex" justify="space-between" className="up-status">
-          <Col span={20}  offset={2}>
-            <Card title="تعداد کل فراهشدارها برحسب زمان"  className="card-progress box-shadow">
-              <BarBizcharts data={this.state.data}/>
-            </Card>
-          </Col>
-        </Row>
-      </Row>
-    </div>
-  )
+      </div>
+    );
   }
 }
 
-export default Dashboard;
+export default withTranslation()(Dashboard); //export default Dashboard;

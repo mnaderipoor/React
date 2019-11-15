@@ -1,53 +1,40 @@
-.App {
-  text-align: center;
+@import '~antd/dist/antd.css';
+
+.ant-layout{
+  background: #1e1e2f;
+}
+.ant-layout-header{
+  padding: 0px 20px;
+}
+.cardStyle{
+  margin-top: 50px;
+  margin-right: 20px;
+  border-radius: 10px;
+  /*background:#1e1e2f;*/
+  background:#FFF;
+  box-shadow: 0 2px 8px 0 rgba(255,255,255,0.5)
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+/*.ant-divider-horizontal{*/
+/*  margin: 10px 0*/
+/*}*/
+
+.ant-layout-header {
+  border-radius: 10px ;
+  margin:10px;
+  box-shadow: 0px 2px 4px 0px rgba(255,255,255,0.5);
+  background: #001529;
+  /*background: #1e1e2f;*/
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.ant-layout-content {
+  border-radius: 10px ;
+  margin:10px;
+  box-shadow: 0px 2px 4px 0px rgba(255,255,255,0.5);
+  background: #001529;
+  minHeight: 280
 }
 
-.App-link {
-  color: #61dafb;
-}
-.viewport {
-  padding-right: 220px;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
 
-.content {
-  width: 100%;
-  position: relative;
-  margin-left: 0;
-}
 
-.content-container {
-  padding-top: 20px;
-  padding-left: 10px;
-}
 
-/* Sidebar Styles */
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
