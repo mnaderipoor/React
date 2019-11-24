@@ -1,21 +1,11 @@
 import React from "react";
-import {
-    G2,
-    Chart,
-    Geom,
-    Axis,
-    Tooltip,
-    Coord,
-    Label,
-    Legend,
-    View,
-    Guide,
-    Shape,
-    Facet,
-    Util
-} from "bizcharts";
+import {Chart, Geom,Axis, Tooltip,Legend,} from "bizcharts";
 
 class BarBizcharts extends React.Component {
+    // data : [{
+    //     item: "a",
+    //     value: 40
+    // }]
     render() {
         const {data} =this.props
         const cols = {

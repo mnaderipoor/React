@@ -6,10 +6,12 @@
     "userLogout": "logout",
     "sa": "Situational awareness",
     "radarTitle": "The effect of threats on interests",
-    "tlp": "TLP",
     "threatTableTitle": "The list of effective threats to SA calculation",
+    "threatstableTitleInThreatsPage": "The list of received threats",
     "threatsOccurencePercent": "Threats occurrence",
-    "threatsCount": "Threats Count"
+    "threatsCount": "Threats Count",
+    "metaAlertTableTitle": "The list of received MetaAlerts",
+    "metaAlertCount": "MetaAlert Counts"
   },
   "pestel": {
     "p": "policy",
@@ -27,7 +29,10 @@
     "vulnerabilities": "Vulnerability",
     "attack_patterns":"AttackPattern",
     "occurrence_time": " Time Of Occurrence",
-    "threat_score":"Score"
+    "threat_score":"Score",
+    "threat": "Threat",
+    "new": "New Threat",
+    "tlp": "TLP"
 
   },
   "sidebar":{
@@ -40,6 +45,19 @@
     "setting": "Setting",
     "language": "Language",
     "chosenLanguage1": "Persian",
-    "chosenLanguage2": "English"
+    "chosenLanguage2": "English",
+    "report": "Reports"
+  },
+  "tlp": {
+    "white": "unlimited publish",
+    "green": "don't publish in the web",
+    "yellow":"limited publish ",
+    "red": "don't publish"
+  },
+  "siem": {
+    "radarTitle": "The effect of Siem's threats on interests",
+    "gaugeTitle": "Siem SA",
+    "tableTitle": "The list of Siem's threats"
+
   }
 }

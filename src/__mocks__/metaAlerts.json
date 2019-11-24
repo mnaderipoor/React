@@ -22,8 +22,7 @@
       "CAPEC-470"
     ],
     "occurrence_time": "2019-08-05T08:19:03.338293Z",
-    "threat_score": 10,
-    "tlp": "white"
+    "threat_score": 10
   },
   { "id": 2,
     "title": "IPV Poison",
@@ -41,9 +40,7 @@
       "CAPEC-470"
     ],
     "occurrence_time": "2019-08-05T08:19:03.338293Z",
-    "threat_score": 70,
-    "tlp": "green"
-  },
+    "threat_score": 70},
   { "id": 3,
     "title": "IPV Poison",
     "affected_scope": "SIEM3",
@@ -60,9 +57,7 @@
       "CAPEC-470"
     ],
     "occurrence_time": "2019-08-05T08:19:03.338293Z",
-    "threat_score": 35,
-    "tlp": "yellow"
-  },
+    "threat_score": 35},
   { "id": 4,
     "title": "IPV Poison",
     "affected_scope": "SIEM1",
@@ -79,9 +74,7 @@
       "CAPEC-470"
     ],
     "occurrence_time": "2019-08-05T08:19:03.338293Z",
-    "threat_score": 90,
-    "tlp": "red"
-  },
+    "threat_score": 90},
   { "id": 5,
     "title": "IPV Poison",
     "affected_scope": "SIEM2",
@@ -98,9 +91,7 @@
       "CAPEC-470"
     ],
     "occurrence_time": "2019-08-05T08:19:03.338293Z",
-    "threat_score": 58,
-    "tlp": "yellow"
-  },
+    "threat_score": 58},
   { "id": 6,
     "title": "IPV Poison",
     "affected_scope": "SIEM5",
@@ -117,7 +108,5 @@
       "CAPEC-470"
     ],
     "occurrence_time": "2019-08-05T08:19:03.338293Z",
-    "threat_score": 90,
-    "tlp": "white"
-  }
+    "threat_score": 90}
 ]

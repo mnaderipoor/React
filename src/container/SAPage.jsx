@@ -1,108 +1,89 @@
 import React, {Component} from "react";
-import {getThreats} from "../services/threatService";
-import {Card, Col, Divider, Row} from "antd";
+import {getThreats, saveThreat} from "../services/threatService";
+import {getListOfSiems} from "../services/threatService";
 import RadarBizcharts from "../components/chart/radarBizcharts";
-import Speedometer from "../components/chart/speedometer";
-import PieBizcharts from "../components/chart/pieBizcharts";
+import { Row,Card, Col, Input, Button, Icon } from 'antd';
+import GaugeBizcharts from "../components/chart/gaugeBizcharts";
+import { withTranslation } from "react-i18next";
+import "./dashboard.css"
+import TableAnt from "../components/table/tableAnt";
+import MockSiemThreatsData from "../__mocks__/siemThreats";
+import MockSiemSA from "../__mocks__/siemSA";
+import MapPestelFactor from "../__mocks__/customizeData/mapPestelFactor";
+import MockRadarData from "../__mocks__/siemPestel";
+import MocklistOfSiems from "../__mocks__/listOfSiems";
+import Form from "../components/common/form";
+import Joi from "joi-browser";
 
-class SAPage extends Component {
-        state = {
-            data : [
-                {
-                    item: "a",
-                    value: 40
-                },
-                {
-                    item: "b",
-                    value: 61
-                },
-                {
-                    item: "c",
-                    value: 27
-                },
-                {
-                    item: "d",
-                    value: 83
-                },
-                {
-                    item: "e",
-                    value: 9
-                }
-            ],
-            threats: [],
-            dataSource : [
-                {
-                    key: '1',
-                    name: 'Mike',
-                    age: 32,
-                    address: '10 Downing Street',
-                },
-                {
-                    key: '2',
-                    name: 'John',
-                    age: 42,
-                    address: '10 Downing Street',
-                }
-            ],
-            columns : [
-                {
-                    title: 'Name',
-                    dataIndex: 'name',
-                    key: 'name',
-                },
-                {
-                    title: 'Age',
-                    dataIndex: 'age',
-                    key: 'age',
-                },
-                {
-                    title: 'Address',
-                    dataIndex: 'address',
-                    key: 'address',
-                }
-            ]
-        };
-        async componentDidMount() {
-            const { data: threats } = await getThreats();
-            this.setState({ threats });
-        }
+class SAPage extends (Component, Form) {
+    state = {
+        data: {
+            title: ""
+        },
+        errors: {},
+        threatsdata:MockSiemThreatsData,
+        sa:MockSiemSA.sa,
+        pestalFactor:MapPestelFactor(MockRadarData),
+        listOfSiems: MocklistOfSiems
+    };
+    schema = {
+        ID: Joi.string(),
+        Title: Joi.string()
+            .required()
+            .label("Title")
+    };
+    async componentDidMount() {
+        // const { data: listOfSiems } = await getListOfSiems();
+        // this.setState({ listOfSiems });
+    }
+    doSubmit = async () => {
+        //call the server
 
+        // const { data: pestalFactor } = await getListOfSiems();
+        // const { data: sa } = await getListOfSiems();
+        // const { data: threatsdata } = await getListOfSiems();
 
+        // this.setState({ pestalFactor });
+        // this.setState({ sa });
+        // this.setState({ threatsdata });
+    };
         render() {
+            const { t } = this.props;
+            // const WrappedAdvancedSearchForm = Form.create({ name: 'advanced_search' })(AdvancedSearchForm);
+
             return(
-                <div id="dashboard">
-                    {/*<PageHeader*/}
-                    {/*  className="disable-back"*/}
-                    {/*  onBack={() => null}*/}
-                    {/*  backIcon={<Icon type="dashboard" />}*/}
-                    {/*  // title="سامانه اشتراک گذاری هشدارهای امنیتی"*/}
-                    {/*/>*/}
-                    <Row className="page-content">
-                        <Divider>
-                            <h4>"آگاهی وضعیتی"</h4>
-                        </Divider>
-                        <br />
+                <div className="page-content">
+                    <Row >
+                        <Row>
+                            <Card  bordered={false} title="جستجو" className="cardStyle">
+                            {/*<WrappedAdvancedSearchForm />*/}
+                                <form onSubmit={this.handleSubmit}>
+                                    {/*{this.renderInput("Title", t('threat.title'))}*/}
+                                    {this.renderSelect("siems", t('threat.title'),[{id:"1", name:"siem1"},{id:"2", name:"siem2"}])}
+                                    {this.renderButton("search")}
+                                </form>
+                            </Card>
+                        </Row>
+                    <br/>
                         <Row  gutter={16} type="flex" justify="space-between" className="up-status">
-                            <Col span={8} className="text-center"  >
-                                <Card  bordered={false} title="آگاهی وضعیتی قلمرو اول" className="card-progress box-shadow">
-                                    <PieBizcharts data={this.state.data}/>
+
+                            <Col span={12} className="text-center" >
+                                <Card  bordered={false} title={t('siem.radarTitle')} className="cardStyle" >
+                                    <RadarBizcharts  height={200} data={this.state.pestalFactor} />
                                 </Card>
                             </Col>
-                            <Col span={8} className="text-center" style={{ marginBottom: 20 }}>
-                                <Card  bordered={false} title="تاثیر آگاهی وضعیتی قلمرو اول بر پارامترهای PESTEL" className="card-progress box-shadow" >
-                                    <RadarBizcharts data={this.state.data} />
-                                </Card>
-                            </Col>
-                            <Col span={8} className="text-center" style={{ marginBottom: 20 }}>
-                                <Card  bordered={false} title="تاثیر آگاهی وضعیتی قلمرو اول بر دفاع، امنیت و تاب آوری" className="card-progress box-shadow"
-                                    // style={{backgroundColor: 'rgba(255, 255, 255, 0.0)', border: 0 }}
-                                    // headStyle={{backgroundColor: 'rgba(255, 255, 255, 0.4)', border: 0 }}
-                                    // bodyStyle={{backgroundColor: '#212529', border: 0 }}
-                                >
-                                    <Speedometer/>
+                            <Col span={12} className="text-center" >
+                                <Card  bordered={false} title={t('siem.gaugeTitle')} className="cardStyle" >
+                                    <GaugeBizcharts height={200}  inputvalue={this.state.sa} />
                                 </Card>
                             </Col>
 
+                        </Row>
+                        <br/>
+                        <Row >
+                            <Card title={t('siem.tableTitle')} bordered={false} className="cardStyle">
+                                <TableAnt data={this.state.threatsdata} />
+                            </Card>
                         </Row>
                     </Row>
                 </div>
@@ -110,4 +91,4 @@ class SAPage extends Component {
         }
     }
 
-export default SAPage;
+export default withTranslation()(SAPage);

@@ -8,7 +8,11 @@ import NotFound from "../container/notFound";
 import Dashboard from "../container/dashboard";
 import ThreatPage from "../container/threatPage";
 import ProtectedRoute from "../components/common/protectedRoute";
+import ThreatForm from "../components/threatForm"
 import SAPage from "../container/SAPage";
+import Reports from "../container/reportPage"
+import Users from "../container/userPage"
+import Settings from "../container/setting"
 
 const Routes =()=> {
     return (
@@ -25,6 +29,10 @@ const Routes =()=> {
                   <Route path="/logout" component={Logout} />
                   <Route path="/not-found" component={NotFound} />
                   <Route path="/dashboard" component={Dashboard} />
+                  <Route path="/reports" component={Reports} />
+                <Route path="/users" component={Users} />
+                <Route path="/settings" component={Settings} />
+                  <Route path="/threats/:id" component={ThreatForm} />
                   <Route path="/threats" component={ThreatPage} />
                   <Route path="/sa" component={SAPage} />
 

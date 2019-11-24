@@ -4,7 +4,7 @@ import { Card, Col, Divider, Row } from "antd";
 import GaugeBizcharts from "../components/chart/gaugeBizcharts";
 import PieHighcharts from "../components/chart/pieHighcharts";
 import RadarBizcharts from "../components/chart/radarBizcharts";
-import BarInteractiveHighcharts from "../components/chart/barInteractiveHighcharts";
+import BarHighchartWithDrilldown from "../components/chart/barHighchartWithDrilldown"
 import TLP from "../components/chart/tlp";
 import TableAnt from "../components/table/tableAnt";
 import { withTranslation } from "react-i18next";
@@ -13,25 +13,25 @@ import { getThreats } from "../services/threatService";
 
 
 import MapPestelFactor from "../__mocks__/customizeData/mapPestelFactor";
-import MapThreatCount from "../__mocks__/customizeData/mapThreatCount"
 import MapThreatTypePercent from "../__mocks__/customizeData/mapThreatTypePercent";
-
+import MapThreatCount from "../__mocks__/customizeData/mapThreatCount"
+import MockBarData from "../__mocks__/threatCount";
+import MapThreatCount2 from "../__mocks__/customizeData/mapThreatCount2"
+import MockBarData2 from "../__mocks__/threatCount2";
 import MockThreatTypePercent from "../__mocks__/threatTypePercent";
 import MockRadarData from "../__mocks__/isacPestel";
-import MockBarData from "../__mocks__/threatCount";
 import MockThreatData from "../__mocks__/threat"
-
+import MockSA from"../__mocks__/sa"
 import "./dashboard.css";
-import BarHighcharts from "../components/chart/barHighcharts";
-import LineHighcharts from "../components/chart/lineHighcharts";
-import TrafficLight from "../components/common/trafficLight";
-import TableCust from "../components/table/threatsTable"
+
 class Dashboard extends Component {
   state = {
     threatsdata:MockThreatData,
-    threatscount:MapThreatCount(MockBarData),
+    //threatscount:MapThreatCount(MockBarData),
+    threatscount:MapThreatCount2(MockBarData2),
     threatTypePercent:MapThreatTypePercent(MockThreatTypePercent ),
-    pestalFactor:MapPestelFactor(MockRadarData)
+    pestalFactor:MapPestelFactor(MockRadarData),
+    sa:MockSA.sa
 
   };
 
@@ -74,19 +74,19 @@ class Dashboard extends Component {
               </Card>
             </Col>
             <Col span={12}>
-              <Row  style={{MarginTop:"0px"}}>
-              <Col span={18}>
+              {/*<Row  style={{MarginTop:"0px"}}>*/}
+              {/*<Col span={18}>*/}
                 <Card title={t('dashboard.sa')} bordered={false} className="cardStyle" >
-                  <GaugeBizcharts height={200} percent={97} />
+                  <GaugeBizcharts height={200} inputvalue={this.state.sa} />
                 </Card>
-              </Col>
-              <Col span={6}>
-                <Card  title={t('dashboard.tlp')}  bordered={false} className="cardStyle">
+              {/*</Col>*/}
+              {/*<Col span={6}>*/}
+              {/*  <Card  title={t('dashboard.tlp')}  bordered={false} className="cardStyle">*/}
 
-                    <TLP width="60" height="205" />
-                </Card>
-              </Col>
-              </Row>
+              {/*      <TLP width="60" height="205" />*/}
+              {/*  </Card>*/}
+              {/*</Col>*/}
+              {/*</Row>*/}
             </Col>
 
           </Row>
@@ -121,7 +121,7 @@ class Dashboard extends Component {
             </Col>
             <Col span={16} className="text-center">
               <Card  title={t('dashboard.threatsCount')} bordered={false} className="cardStyle">
-                <BarInteractiveHighcharts  major={this.state.threatscount[0]} minor={this.state.threatscount[1]}/>
+                <BarHighchartWithDrilldown major={this.state.threatscount[0]} minor={this.state.threatscount[1]}/>
 
               </Card>
             </Col>

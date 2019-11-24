@@ -1,78 +1,33 @@
 import React, {Component} from "react";
-import {Table, Popconfirm, Button, Row, Divider, Col, Card} from "antd";
-import "./risksPage.css";
+import { Row, Card} from "antd";
 import TableAnt from "../components/table/tableAnt";
 import { withTranslation } from "react-i18next";
-import BarBizcharts from "../components/chart/barBizcharts";
+import MockMetaAlertCount from"../__mocks__/metaalertCount"
+import MapMetaAlertCount from "../__mocks__/customizeData/mapThreatCount"
+import BarHighchartWithDrilldown from "../components/chart/barHighchartWithDrilldown"
+import MockMetaAlertData from "../__mocks__/metaAlerts";
+import "./dashboard.css";
+
 class RisksPage extends Component {
     state = {
-        threats: [],
-        data : [
-            {
-                item: "a",
-                value: 40
-            },
-            {
-                item: "b",
-                value: 61
-            },
-            {
-                item: "c",
-                value: 27
-            },
-            {
-                item: "d",
-                value: 83
-            },
-            {
-                item: "e",
-                value: 9
-            }
-        ],
-        dataSource : [
-            {
-                key: '1',
-                name: 'Mike',
-                age: 32,
-                address: '10 Downing Street',
-            },
-            {
-                key: '2',
-                name: 'John',
-                age: 42,
-                address: '10 Downing Street',
-            }
-        ],
-        columns : [
-            {
-                title: 'Name',
-                dataIndex: 'name',
-                key: 'name',
-            },
-            {
-                title: 'Age',
-                dataIndex: 'age',
-                key: 'age',
-            },
-            {
-                title: 'Address',
-                dataIndex: 'address',
-                key: 'address',
-            }
-        ]
+        metaAlertsdata:MockMetaAlertData,
+        metaAlertCount:MapMetaAlertCount(MockMetaAlertCount),
     };
     render() {
         const { t } = this.props;
         return(
             <div className="page-content">
                 <Row >
-                        <Card title={t('dashboard.threatTableTitle')} bordered={false} className="cardStyle">
-                            <TableAnt data={this.state.threatsdata} />
+                        <Card title={t('dashboard.metaAlertTableTitle')} bordered={false} className="cardStyle">
+                            <TableAnt data={this.state.metaAlertsdata} />
                         </Card>
                 </Row>
+                <br/>
                 <Row>
-                    <Card title="تعداد کل فراهشدارها برحسب زمان"  className="card-progress box-shadow">
-                        <BarBizcharts data={this.state.data}/>
+                    <Card title={t('dashboard.metaAlertCount')} bordered={false} className="cardStyle" >
+                        {/*<BarBizcharts data={this.state.data}/>*/}
+                        <BarHighchartWithDrilldown  major={this.state.metaAlertCount[0]} minor={this.state.metaAlertCount[1]}/>
+
                     </Card>
                 </Row>
             </div>

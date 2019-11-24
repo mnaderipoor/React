@@ -12,48 +12,85 @@ applyExporting(Highcharts);
 applyOffline(Highcharts);
 addDrilldownModule(Highcharts)
 
-class barInteractiveHighcharts extends Component {
+class BarHighchartWithDrilldown extends Component {
 
     constructor( props) {
         super( props);
         this.state = {
             major:props.major,
             minor:props.minor,
-            series: [
-                {
-                    name: "Browsers",
-                    colorByPoint: true,
-                    data: [
-                        {
-                            name: "Chrome",
-                            y: 62.74,
-                            drilldown: "Chrome"
-                        },
-                        {
-                            name: "Other",
-                            y: 7.62,
-                            drilldown: null
-                        }
-                    ]
-                }
-            ],
+            series: [{
+                name: 'months',
+                colorByPoint: true,
+                data: [{
+                    name: 'Farvardin',
+                    y: 5,
+                    drilldown: 'farvardin'
+                }]
+            }],
             drilldown: {
                 series: [
                     {
-                        name: "Chrome",
-                        id: "Chrome",
-                        data: [
-                            [
-                                "v65.0",
-                                0.1
-                            ],
-                            [
-                                "v29.0",
-                                0.26
-                            ]
+                        id: 'farvardin',
+                        name: 'weeks',
+                        data: [{
+                            name: 'week1',
+                            y: 4,
+                            drilldown: 'week1_days'
+                        },
+                            {
+                                name: 'week2',
+                                y: 7,
+                                drilldown: 'week2_days'
+                            },
+                            {
+                                name: 'week3',
+                                y: 5,
+                                drilldown: 'week3_days'
+                            },
+                            {
+                                name: 'week4',
+                                y: 2,
+                                drilldown: 'week5_days'
+                            },
+                            {
+                                name: 'week5',
+                                y: 1,
+                                drilldown: 'week5_days'
+                            }
                         ]
-                    }
-                ]
+                    },
+                    {
+                        id: 'week1_days',
+                        name:'Days',
+                        data: [
+                            {name: "One", y:1, drilldown: 'day1_hours'},
+                            {name: "two", y:2, drilldown: 'day2_hours'},
+                            {name: "three", y:0, drilldown: 'day3_hours'},
+                            {name: "four", y:6, drilldown: 'day4_hours'}
+                        ]
+                    },
+                    {
+
+                        id: 'day1_hours',
+                        name:'Hours',
+                        data: [
+                            {name: "1", y:1},
+                            {name: "2", y:2},
+                            {name: "3", y:0},
+                            {name: "4", y:5}
+                        ]
+                    },
+                    {
+
+                        id: 'day2',
+                        data: [1, 2, 3]
+                    },
+                    {
+
+                        id: 'day3',
+                        data: [1, 2, 3]
+                    }]
             }
         };
     }
@@ -81,7 +118,7 @@ class barInteractiveHighcharts extends Component {
 
             },
             legend: {
-                enabled: false
+                enabled: true
             },
             plotOptions: {
                 series: {
@@ -147,4 +184,4 @@ class barInteractiveHighcharts extends Component {
         return <div id="container_interactive"></div>;
     }
 }
-export default barInteractiveHighcharts;
+export default BarHighchartWithDrilldown;

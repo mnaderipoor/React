@@ -5,6 +5,7 @@ import threatData from "../../__mocks__/threat"
 import {withTranslation} from "react-i18next";
 import "./tableAnt.css"
 import Ellipsis from "ant-design-pro/lib/Ellipsis";
+import {Link} from "react-router-dom";
 
 class TableAnt extends Component {
 
@@ -82,7 +83,11 @@ class TableAnt extends Component {
                 key: 'title',
                 width: '100px',
                 ...this.getColumnSearchProps('title'),
-                render:text=><Ellipsis length={20}>{text}</Ellipsis>,
+                render:text=>{
+                    console.log(text)
+                    return(
+                    <Link to={`/threats/${text}`}>{text}</Link>
+                )}
 
             },
 
@@ -99,7 +104,8 @@ class TableAnt extends Component {
                 key: 'threat_type',
                 ...this.getColumnSearchProps('threat_type'),
                 render:text=><Ellipsis length={10}>{text}</Ellipsis>,
-            }, {
+            },
+            {
                 title: t('threat.threat_score'),
                 dataIndex: 'threat_score',
                 key: 'threat_score',
@@ -107,18 +113,20 @@ class TableAnt extends Component {
                 render: threat_score => {
                     let color = "";
                     let score = Number(threat_score)
-                    if (score < 15)
-                        color = "#0033EE"
-                    if (score >= 15 && score < 30)
-                        color = "#7ED321"
-                    if (score >= 30 && score < 45)
+                    if (score < 20)
+                        color = "#FFFFFF"
+                    if (score >= 20 && score < 35)
+                        color = "#0181EE"
+                    if (score >= 35 && score < 50)
+                        color = "#1BD309"
+                    if (score >= 50 && score < 65)
                         color = "#FFFF00"
-                    if (score >= 45 && score < 60)
-                        color = "#FFBF00"
-                    if (score >= 60 && score < 80)
-                        color = "#FF0000"
-                    if (score >= 80)
-                        color = "#8f0000"
+                    if (score >= 65 && score < 75)
+                        color = "#FF7B08"
+                    if (score >= 75 && score < 90)
+                        color = "#BD0000"
+                    if (score >= 90)
+                        color = "#6B0000"
                     return (
                         <span>
                         <Tag color={color} key={threat_score} style={{ color:"#000" ,border: "2px solid #FFF"}}>
@@ -141,6 +149,43 @@ class TableAnt extends Component {
                 key: 'description',
                 ...this.getColumnSearchProps('description'),
                 render:text=><Ellipsis length={20}>{text}</Ellipsis>,
+            },
+            {
+                title: t('threat.tlp'),
+                dataIndex: 'tlp',
+                key: 'tlp',
+                ...this.getColumnSearchProps('tlp'),
+                render: tlp => {
+                    let color = "";
+                    let name = "";
+                    if (tlp == "white"){
+                        color = "#FFFFFF";
+                        name = t('tlp.white');
+                    }
+
+                    else if (tlp == "green") {
+                        color = "#7ED321";
+                        name = t('tlp.green');
+                    }
+                    else if (tlp == "yellow")
+                    {
+                           color = "#FFBF00";
+                           name = t('tlp.yellow');}
+                    else if (tlp == "red")
+                        {
+                            color = "#FF0000";
+                            name = t('tlp.red');}
+                    else
+                       { color = "#FFBF00";
+                           name = t('tlp.yellow');}
+                    return (
+                        <span>
+                        <Tag color={color} key={tlp} style={{ color:"#000" ,border: "2px solid #FFF"}}>
+                            {name}
+                        </Tag>
+                        </span>
+                    );
+                },
             },
             {
                 title: t('threat.vulnerabilities'),

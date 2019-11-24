@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Icon, Menu } from "antd";
 import logo from "../../assets/logo/logo2.png";
-import "./sidebar.css";
 import { useTranslation } from 'react-i18next';
+import "../../container/dashboard.css";
 const SideBar = () => {
 
     const { SubMenu } = Menu;
@@ -17,9 +17,10 @@ const SideBar = () => {
         { id: "2", icon: "warning", route: "/risks", name: t('sidebar.metaAlert') },
         { id: "3", icon: "fund", route: "/sa", name: t('sidebar.situationalAwareness') },
         { id: "4", icon: "border-outer", route: "/threats", name: t('sidebar.threats') },
-        { id: "5", icon: "user", route: "#", name: t('sidebar.users') },
-        { id: "6", icon: "setting", route: "#", name: t('sidebar.setting') },
-        { id: "7", icon: "global", route: "#", name: t('sidebar.language') ,submenu:[{id: "8", value:"en", name: t('sidebar.chosenLanguage2')},{id: "9",value:"fa", name: t('sidebar.chosenLanguage1')}]}
+        { id: "5", icon: "user", route: "/reports", name: t('sidebar.report') },
+        { id: "6", icon: "user", route: "/users", name: t('sidebar.users') },
+        { id: "7", icon: "setting", route: "/settings", name: t('sidebar.setting') },
+        { id: "8", icon: "global", route: "#", name: t('sidebar.language') ,submenu:[{id: "9", value:"en", name: t('sidebar.chosenLanguage2')},{id: "10",value:"fa", name: t('sidebar.chosenLanguage1')}]}
     ];
   return (
     <React.Fragment>
@@ -27,7 +28,7 @@ const SideBar = () => {
 
 
       <Menu
-        theme="dark"
+         theme="dark"
         mode="inline"
         defaultSelectedKeys={["1"]}
 

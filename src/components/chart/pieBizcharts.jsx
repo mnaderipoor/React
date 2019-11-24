@@ -1,19 +1,5 @@
 import React, { Component } from "react";
-import {
-  G2,
-  Chart,
-  Geom,
-  Axis,
-  Tooltip,
-  Coord,
-  Label,
-  Legend,
-  View,
-  Guide,
-  Shape,
-  Facet,
-  Util
-} from "bizcharts";
+import {Chart,Geom,Axis,Tooltip, Coord, Legend} from "bizcharts";
 import DataSet from "@antv/data-set";
 import "./bizchratTheme.css";
 

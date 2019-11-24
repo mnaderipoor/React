@@ -1,11 +1,19 @@
 @import '~antd/dist/antd.css';
 
+.ant-table-thead > tr > th {
+    /*background: #141425;*/
+    background: #0E78FF;
+    color: #FFFFFF;
+   font-size-adjust: 0.6;
+}
+/*.ant-table-tbody > tr > th {*/
+/*    background: #1d1d2e;*/
+/*    color: #FFFFFF;*/
+/*    font-size: 14px;*/
+/*}*/
 .ant-table{
     color : #FFF;
 }
-.clickRowStyl{background-color :blue}
-
-.ant-table-tbody>.clickRowStyl:hover>td{background-color: red}
 
 /*//:global(.ant-btn-primary) {*/
 /*//    background-color: var(--secondary-color);*/

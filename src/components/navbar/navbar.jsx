@@ -3,15 +3,15 @@ import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import { Avatar, Menu , Dropdown} from "antd";
 import { useTranslation } from 'react-i18next';
-
+import customFont from '../../assets/fonts/W_yekan.ttf'
 
 
 const NavBar = ({user}) => {
     const { t } = useTranslation();
     const menu = (
-        <Menu>
+        <Menu className="menu">
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                <a  target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
                     {t('dashboard.userProfile')}
                 </a>
             </Menu.Item>
@@ -61,7 +61,7 @@ const NavBar = ({user}) => {
                       </a>
                       </Dropdown>
               </NavLink>
-              <NavLink className="nav navbar-nav " to="#">
+              <NavLink  className="nav navbar-nav " to="#">
                   {t('dashboard.title')}
               </NavLink>
     </nav>

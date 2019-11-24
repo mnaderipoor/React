@@ -6,10 +6,12 @@
     "userLogout": "خروج",
     "sa": "وضعیت سایبری",
     "radarTitle": "تاثیر تهدیدات بر منافع",
-    "tlp": "TLP",
-    "threatTableTitle": "فهرست تهدیدهای موثر در محاسبه آگاهی وضعیتی",
+    "threatTableTitle": "فهرست تهدیدها",
+    "threatstableTitleInThreatsPage": "فهرست تهدیدها",
     "threatsOccurencePercent": "درصد رخداد انواع تهدید",
-    "threatsCount": "تعداد کل تهدیدهای دریافتی"
+    "threatsCount": "تعداد کل تهدیدها",
+    "metaAlertTableTitle": "فهرست فراهشدارهای دریافتی",
+    "metaAlertCount": "تعداد فراهشدارهای دریافتی"
   },
   "pestel": {
     "p": "سیاسی",
@@ -27,7 +29,10 @@
     "vulnerabilities": "آسیب پذیری ها",
     "attack_patterns":"الگوهای حمله",
     "occurrence_time": " زمان وقوع",
-    "threat_score":"امتیاز"
+    "threat_score":"امتیاز",
+    "threat": "تهدید",
+    "new": "اضافه کردن تهدید جدید",
+    "tlp": "حساسیت انتشار"
   },
   "sidebar":{
     "organizationName": "وزارت دفاع و پشتیبانی نیروهای مسلح",
@@ -39,6 +44,19 @@
     "setting": "تنظیمات",
     "language": "زبان",
     "chosenLanguage1": "فارسی",
-    "chosenLanguage2": "انگلیسی"
+    "chosenLanguage2": "انگلیسی",
+    "report": "گزارش گیری"
+  },
+  "tlp": {
+    "white": "انتشار بدون محدودیت",
+    "green": "عدم انتشار در وب",
+    "yellow":"انتشار محدود ",
+    "red": "عدم انتشار"
+  },
+  "siem": {
+    "radarTitle": "تاثیر تهدیدهای قلمرو بر منافع",
+    "gaugeTitle": "وضعیت سایبری قلمرو",
+    "tableTitle": "فهرست تهدیدهای قلمرو"
+
   }
 }
